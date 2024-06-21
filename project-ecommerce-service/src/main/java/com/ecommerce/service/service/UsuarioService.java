@@ -27,6 +27,18 @@ public class UsuarioService {
         return opt.map(usuario -> new GenericResponse<>(TIPO_AUTH, RPTA_OK, "Inicio de sesión correcto", usuario)).orElseGet(() -> new GenericResponse<>(TIPO_AUTH, RPTA_WARNING, "Usuario no existente", new Usuario()));
     }
 
+    //Método para guardar credenciales del usuario
+    public GenericResponse<?> guardarUsuario(Usuario u){
+        Optional<Usuario> optU = this.usuarioRepository.findById(u.getId());
+        int idf = optU.map(Usuario::getId).orElse(0);
+        if(idf == 0){
+            return new GenericResponse<>(TIPO_DATA, RPTA_OK, "Usuario Registrado Correctamente", this.usuarioRepository.save(u));
+        }else{
+            return new GenericResponse<>(TIPO_DATA, RPTA_OK, "Datos del usuario actualizados", this.usuarioRepository.save(u));
+        }
+    }
+
+
 
 
 

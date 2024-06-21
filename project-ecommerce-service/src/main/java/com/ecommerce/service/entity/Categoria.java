@@ -9,6 +9,9 @@ import lombok.Setter;
 @Setter
 public class Categoria {
 
+    public static final String C_NOMBRE = "nombre";
+    public static final String C_VIGENCIA = "vigencia";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -22,5 +25,12 @@ public class Categoria {
     @OneToOne
     private DocumentoAlmacenado foto;
 
+    @Transient
+    private String vigenciaString;
+
+
+    public void setVigenciaString(String vigenciaString) {
+        this.vigenciaString = vigenciaString;
+    }
 
 }
